@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheckCircle, faTimesCircle } from '@fortawesome/free-solid-svg-icons';
-import AutocompleteTeams from './AutocompleteTeams';
+import AutocompleteTeams from './autocompleteTeams';
 
 export default function TeamNameEditor(props) {
   let s = props.side === 'home' ? 0 : 1;
