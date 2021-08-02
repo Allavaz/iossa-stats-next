@@ -1,5 +1,5 @@
 import { IncomingForm } from "formidable";
-import pushToDB from "../../lib/PushToDB";
+import pushToDB from "../../lib/pushToDB";
 
 export default function handler(req, res) {
   if (req.method === 'POST') {
