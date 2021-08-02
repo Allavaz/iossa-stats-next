@@ -16,7 +16,7 @@ function MyApp({ Component, pageProps }) {
 				document.documentElement.setAttribute('data-theme', 'light');
 			}
 		}
-	})
+	}, [])
 
   return (
 		<>
