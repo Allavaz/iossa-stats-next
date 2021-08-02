@@ -26,5 +26,6 @@ export default async function handler(req, res) {
     });
     res.setHeader('Content-Type', 'image/png');
     res.send(image);
+    await browser.close();
   }
 }
