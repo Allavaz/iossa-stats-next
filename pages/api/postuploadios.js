@@ -2,13 +2,11 @@ import pushToDBios from "../../lib/pushToDBios";
 
 export default function handler(req, res) {
   if (req.method === 'POST') {
-    let torneo = `${req.body.access_token}`;
+    let strArr = req.body.access_token.split('&', 2);
     let vod = "";
-    console.dir(`Received JSON from ${req.ip} with Token ID: ${torneo}`);
-    if (req.ip == process.env.IOS_SERVER_IP) {
+    if (strArr[0] == process.env.KEY) {
       try {
-        pushToDBios(req.body, torneo, vod, res);
-        res.end(" -> JSON subido con exito");
+        pushToDBios(req.body, strArr[1], vod, res);
       } catch (e) {
         console.error(e);
         res.end(e.toString());
