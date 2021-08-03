@@ -622,6 +622,10 @@ table tr td {
   margin: 10px;
 }
 
+.bigClubLogo {
+  height: 128px;
+}
+
 @media only screen and (max-width: 390px) {
   #header {
     display: none;

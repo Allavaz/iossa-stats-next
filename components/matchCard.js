@@ -302,7 +302,7 @@ export default function MatchCard(props) {
 						</td>
 					</tr>
 					<tr>
-						<td><img height='128px' alt={props.data.teams[0].teamname} src={getTeamLogo(props.data.teams[0].teamname)}></img></td>
+						<td><img className='bigClubLogo' alt={props.data.teams[0].teamname} src={getTeamLogo(props.data.teams[0].teamname)}></img></td>
 						<td>
 							{scoreEditing ? <ScoreEditor home={props.data.teams[0].score} away={props.data.teams[1].score} onChangeScore={onChangeScore} setScoreEditing={setScoreEditing} /> :
 							<div style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}
@@ -335,7 +335,7 @@ export default function MatchCard(props) {
 								</div> : null}
 							</div>}
 						</td>
-						<td><img height='128px' alt={props.data.teams[1].teamname} src={getTeamLogo(props.data.teams[1].teamname)}></img></td>
+						<td><img className='bigClubLogo' alt={props.data.teams[1].teamname} src={getTeamLogo(props.data.teams[1].teamname)}></img></td>
 					</tr>
 					<tr id='eventslist'>
 						<td>
