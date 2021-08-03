@@ -627,6 +627,7 @@ export default function Match({ data, table, tablaTorneo, challonge, editable, p
           <meta property="og:type" content="website" />
           <meta property="og:title" content={`${data.teams[0].teamname} vs. ${data.teams[1].teamname}`} />
           <meta property="og:image" content={"/api/matchcard/" + data._id} />
+          <meta property="og:site_name" content='IOSoccer Sudamérica' />
           <meta property="twitter:card" content="summary_large_image" />
           <meta property="twitter:title" content={`${data.teams[0].teamname} vs. ${data.teams[1].teamname}`} />
           <meta property="twitter:image" content={"/api/matchcard/" + data._id} />
