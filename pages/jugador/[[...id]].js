@@ -36,11 +36,13 @@ export default function Player({playerMatches, statsAll, statsLast15, statsLast1
     // Este codigo redibuja los graficos cuando se cambia de tema claro
     // a tema oscuro o viceversa
     let observer = new MutationObserver(mutations => {
-      setDate(new Date());
+      if (mutations[0].attributeName === 'data-theme') {
+        setDate(new Date());
+      }
     });
 
     observer.observe(document.documentElement, {attributes: true});
-  });
+  }, []);
 
   return (
     <>
