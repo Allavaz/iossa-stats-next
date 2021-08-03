@@ -793,11 +793,18 @@ table tr td {
 }
 
 .profilepicture {
-  box-shadow: var(--shadow) !important;
-  border-radius: 5px !important;
-  border: 1px solid var(--button-border) !important;
-  width: 150px !important;
-  height: 150px !important;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 15px;
+}
+
+.profilepicture img {
+  box-shadow: var(--shadow);
+  border-radius: 5px;
+  border: 1px solid var(--button-border);
+  width: 150px;
+  height: 150px;
 }
 
 .stat {
@@ -851,13 +858,6 @@ svg {
   font-weight: bold;
   margin-top: 10px;
   width: min-content;
-}
-
-.profilepicturediv {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-right: 15px;
 }
 
 #pelota {

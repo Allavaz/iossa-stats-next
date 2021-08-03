@@ -1,5 +1,4 @@
 import { getTeamLogo } from '../utils/Utils';
-import Image from 'next/image';
 import RadarG from './radarG';
 
 function getPosColor(pos) {
@@ -42,8 +41,8 @@ export default function PlayerCard({ statsAll, statsLast15, steamInfo }) {
     <div className='whitespace' style={{paddingBottom: '0px', marginBottom: 0, flexGrow: 1}}>
 			<div style={{display: 'flex', padding: '10px', justifyContent: 'center', flexWrap: 'wrap', alignItems: 'center'}}>
 				<div style={{display: 'flex', flexGrow: 1, maxWidth: '328px', marginBottom: '10px'}}>
-					<div className='profilepicturediv'>
-              <Image src={steamInfo.avatarfull} className='profilepicture' alt={statsAll.name} width='150px' height='150px' />
+					<div className='profilepicture'>
+						<img src={steamInfo.avatarfull} alt={statsAll.name} height='150px' />
 						<div style={{display: 'flex', justifyContent: 'space-evenly', width: '100%'}}>
 							<div className='position' style={{backgroundColor: getPosColor(statsAll.lastpos)}}>{statsAll.lastpos}</div>
 							{
@@ -58,7 +57,7 @@ export default function PlayerCard({ statsAll, statsLast15, steamInfo }) {
 					<div>
 						<div className='playername'>{statsAll.name}</div>
 						<div style={{marginTop: '5px', color: 'var(--header-color)', marginBottom: '10px', display: statsAll.name === steamInfo.personaname ? 'none' : 'block'}}>{steamInfo.personaname}</div>
-						<div className='teamlogo' style={{marginTop: '5px'}}><Image width='16px' height='16px' src={getTeamLogo(statsAll.team)} alt={statsAll.team}></Image> <div id='fullteamname' style={{color: 'var(--header-color)', marginLeft: '5px'}}>{statsAll.team}</div></div>
+						<div className='teamlogo' style={{marginTop: '5px'}}><img height='16px' src={getTeamLogo(statsAll.team)} alt={statsAll.team}></img> <div id='fullteamname' style={{color: 'var(--header-color)', marginLeft: '5px'}}>{statsAll.team}</div></div>
 						<div className='playersummary' style={{marginTop: '10px', fontSize: '0.75em'}}>{`${statsAll.matches} partido${statsAll.matches === 1 ? '' : 's'}`}</div>
 						<div className='playersummary' style={{marginTop: '5px', fontSize: '0.75em'}}>{`${statsAll.wins} victoria${statsAll.wins === 1 ? '' : 's'}`}</div>
 						<div className='playersummary' style={{marginTop: '5px', fontSize: '0.75em'}}>{`${statsAll.draws} empate${statsAll.draws === 1 ? '' : 's'}`}</div>
