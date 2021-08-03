@@ -1,5 +1,4 @@
 import { getTeamLogo } from "../utils/Utils";
-import Image from 'next/image';
 import Link from 'next/link';
 
 export default function Top10Goleadores({ players, category }) {
@@ -20,7 +19,7 @@ export default function Top10Goleadores({ players, category }) {
             {players.map((item, index) => (
               <tr key={item._id}>
                   <td width='25px'>{index+1}</td>
-                  <td><Link href={`/jugador/${item._id}`}><a><div className='teamlogo' style={{paddingRight: '5px', justifyContent: 'center'}}><Image width='16px' height='16px' src={getTeamLogo(item.team)} alt={item.team}></Image> <div style={{marginLeft: '5px'}}>{item.name}</div></div></a></Link></td>
+                  <td><Link href={`/jugador/${item._id}`}><a><div className='teamlogo' style={{paddingRight: '5px', justifyContent: 'center'}}><img height='16px' src={getTeamLogo(item.team)} alt={item.team}></img> <div style={{marginLeft: '5px'}}>{item.name}</div></div></a></Link></td>
                   <td width='75px'>{item.matches}</td>
                   <td width='70px'>{item.goals}</td>
               </tr>
