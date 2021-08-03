@@ -6,6 +6,7 @@ import { useRouter } from "next/router";
 import Top10Goleadores from "../../components/top10Goleadores";
 import Top10Asistidores from "../../components/top10Asistidores";
 import Top10Rusticos from "../../components/top10Rusticos";
+import Torneos from "../../utils/Torneos.json";
 
 function getCategory(arg) {
   if (arg === 'all') {
