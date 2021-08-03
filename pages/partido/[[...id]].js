@@ -629,7 +629,7 @@ export default function Match({ data, table, tablaTorneo, challonge, editable, p
           <meta property="og:image" content={"/api/matchcard/" + data._id} />
           <meta property="og:site_name" content='IOSoccer Sudamérica' />
           <meta name="twitter:card" content="summary_large_image" />
-          <meta name="twitter:title" content={`${data.teams[0].teamname} vs. ${data.teams[1].teamname}`} />
+          <meta name="twitter:title" content={`${data.teams[0].teamname} vs. ${data.teams[1].teamname} | IOSoccer Sudamérica`} />
           <meta name="twitter:image:src" content={"https://stats.iosoccer-sa.bid/api/matchcard/" + data._id} />
           <meta name="twitter:site" content="@IOSoccerSA" />
         </Head>
