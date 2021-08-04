@@ -1,5 +1,5 @@
 import { useTable, usePagination, useFilters } from 'react-table';
-import { useMemo, useEffect } from 'react';
+import { useMemo } from 'react';
 import Link from 'next/link';
 import { getTeamLogo } from '../utils/Utils';
 import Image from 'next/image';
@@ -194,20 +194,16 @@ export default function IndividualStats({ players, category }) {
     state: { pageIndex, pageSize },
   } = tableInstance
 
-  useEffect(() => {
-    let table = document.getElementsByClassName('divDataTable')[0];
-    let height = table.getBoundingClientRect().height;
-    table.style.height = height + 'px';
-    table.style.borderRight = '1px solid var(--table-border-color)';
-    table.style.borderLeft = '1px solid var(--table-border-color)';
-    table.style.borderTop = '1px solid var(--table-border-color)';
-    table.style.backgroundColor = 'var(--table-odd-row-color)';
-  }, [])
-
   return (
     <>
       <h3>ESTADÍSTICAS INDIVIDUALES - {category.toUpperCase()}</h3>
-      <div className='divDataTable'>
+      <div className='divDataTable' style={{
+        height: '481px',
+        borderRight: '1px solid var(--table-border-color)',
+        borderLeft: '1px solid var(--table-border-color)',
+        borderTop: '1px solid var(--table-border-color)',
+        backgroundColor: 'var(--table-odd-row-color)'
+      }}>
         <table {...getTableProps()} style={{borderCollapse: 'initial'}} className="dataTable">
           <thead>
             {headerGroups.map((headerGroup, index) => (

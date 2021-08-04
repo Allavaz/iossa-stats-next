@@ -1,4 +1,4 @@
-import { useMemo, useEffect } from "react";
+import { useMemo } from "react";
 import { useTable, usePagination, useGlobalFilter } from 'react-table';
 import Link from 'next/link';
 import { useRouter } from "next/router";
@@ -67,16 +67,6 @@ export default function Results({ matches, category }) {
     state: { pageIndex, pageSize },
   } = tableInstance
 
-  useEffect(() => {
-    let table = document.getElementsByClassName('divDataTable')[0];
-    let height = table.getBoundingClientRect().height;
-    table.style.height = height + 'px';
-    table.style.border = 0;
-    table.style.borderRight = '1px solid var(--table-border-color)';
-    table.style.borderLeft = '1px solid var(--table-border-color)';
-    table.style.backgroundColor = 'var(--table-odd-row-color)';
-  }, [])
-
   return (
     <>
       <div style={{display: 'flex', alignItems: 'center'}}>
@@ -94,7 +84,14 @@ export default function Results({ matches, category }) {
             boxShadow: "var(--shadow)"
           }} />
       </div>
-      <div className='divDataTable'>
+      <div className='divDataTable' style={{
+        height: '511px',
+        border: 0,
+        borderRight: '1px solid var(--table-border-color)',
+        borderLeft: '1px solid var(--table-border-color)',
+        backgroundColor: 'var(--table-odd-row-color)',
+        borderBottom: (page.length < pageSize && page.length > 0) ? '1px solid var(--table-border-color)' : 0
+      }}>
         <table className='dataTable' {...getTableProps()}>
           <tbody {...getTableBodyProps()}>
             {rows.length === 0 ? <div 
@@ -128,7 +125,7 @@ export default function Results({ matches, category }) {
         </table>
       </div>
       <div className='pagination'>
-        <button className='boton' disabled={!canPreviousPage} onClick={e => {previousPage(); router.push(`/resultados/`)}} style={{margin: 0, marginRight: '10px'}}>Anterior</button>
+        <button className='boton' disabled={!canPreviousPage} onClick={e => previousPage()} style={{margin: 0, marginRight: '10px'}}>Anterior</button>
         <div>Pagina {pageIndex + 1} de {Math.max(pageCount, 1)}</div>
         <button className='boton' disabled={!canNextPage} onClick={e => nextPage()} style={{margin: 0, marginLeft: '10px'}}>Siguiente</button>
       </div>
