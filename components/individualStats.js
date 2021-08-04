@@ -1,10 +1,13 @@
 import { useTable, usePagination, useFilters } from 'react-table';
 import { useMemo } from 'react';
+import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { getTeamLogo } from '../utils/Utils';
 import Image from 'next/image';
 
-export default function IndividualStats({ players, category }) {
+export default function IndividualStats({ players, category, pagina }) {
+  const router = useRouter();
+
   const columns = useMemo(() => [
     {
       Header: 'Jugador',
@@ -176,7 +179,7 @@ export default function IndividualStats({ players, category }) {
   ], []);
 
   const data = useMemo(() => players, [players]);
-  const tableInstance = useTable({ columns, data, initialState: { pageSize: 15 } }, useFilters, usePagination);
+  const tableInstance = useTable({ columns, data, initialState: { pageSize: 15, pageIndex: pagina } }, useFilters, usePagination);
 
   const {
     getTableProps,
@@ -280,9 +283,41 @@ export default function IndividualStats({ players, category }) {
         </table>
       </div>
       <div className='pagination'>
-        <button className='boton' disabled={!canPreviousPage} onClick={e => previousPage()} style={{margin: 0, marginRight: '10px'}}>Anterior</button>
+        <button 
+          className='boton' 
+          disabled={!canPreviousPage} 
+          onClick={e => {
+            let id;
+            if (router.query.id) {
+              id = router.query.id[0];
+            } else {
+              id = 't7'
+            }
+            router.push(`/individuales/${id}/${pageIndex}`, undefined, { shallow: true });
+            previousPage();
+          }}
+          style={{margin: 0, marginRight: '10px'}}
+        >
+          Anterior
+        </button>
         <div>Pagina {pageIndex + 1} de {Math.max(pageCount, 1)}</div>
-        <button className='boton' disabled={!canNextPage} onClick={e => nextPage()} style={{margin: 0, marginLeft: '10px'}}>Siguiente</button>
+        <button 
+          className='boton' 
+          disabled={!canNextPage} 
+          onClick={e => {
+            let id;
+            if (router.query.id) {
+              id = router.query.id[0];
+            } else {
+              id = 't7'
+            }
+            router.push(`/individuales/${id}/${pageIndex+2}`, undefined, { shallow: true });
+            nextPage();
+          }} 
+          style={{margin: 0, marginLeft: '10px'}}
+        >
+          Siguiente
+        </button>
       </div>
     </>
   )

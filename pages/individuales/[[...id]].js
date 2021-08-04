@@ -48,22 +48,28 @@ function getTemporada(arg) {
 
 export async function getServerSideProps(context) {
   let id;
-  if (context.params.id) id = context.params.id[0];
-  else id = 't7';
+  let page = 0;
+  if (context.params.id) {
+    id = context.params.id[0];
+    if (context.params.id.length === 2) {
+      page = context.params.id[1] - 1;
+    }
+  } else id = 't7';
   if (getAllQueries().includes(id)) {
     let players = await getPlayers(id);
     let category = getCategory(id);
     return ({props: {
       players: JSON.parse(JSON.stringify(players)),
       category: category,
-      temporada: getTemporada(id)
+      temporada: getTemporada(id),
+      page: parseInt(page)
     }});
   } else {
     return ({ notFound: true });
   }
 }
 
-export default function Individuales({ players, category, temporada }) {
+export default function Individuales({ players, category, temporada, page }) {
   const router = useRouter();
 
   function selectTorneo(id) {
@@ -76,7 +82,7 @@ export default function Individuales({ players, category, temporada }) {
         <title>Estadísticas Individuales {category} | IOSoccer Sudamérica</title>
       </Head>
       <Selector selectTorneo={selectTorneo} selectTemporada={selectTorneo} temporada={temporada}></Selector>
-      <IndividualStats players={players} category={category} />
+      <IndividualStats players={players} category={category} pagina={page} />
     </>
   )
 }

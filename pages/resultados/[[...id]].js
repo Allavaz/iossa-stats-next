@@ -48,22 +48,28 @@ function getTemporada(arg) {
 
 export async function getServerSideProps(context) {
   let id;
-  if (context.params.id) id = context.params.id[0];
-  else id = 't7';
+  let page = 0;
+  if (context.params.id) {
+    id = context.params.id[0];
+    if (context.params.id.length === 2) {
+      page = context.params.id[1] - 1;
+    }
+  } else id = 't7';
   if (getAllQueries().includes(id)) {
     let matches = await getMatches(id);
     let category = getCategory(id);
     return ({props: {
       matches: JSON.parse(JSON.stringify(matches)),
       category: category,
-      temporada: getTemporada(id)
+      temporada: getTemporada(id),
+      page: parseInt(page)
     }});
   } else {
     return ({ notFound: true });
   }
 }
 
-export default function Resultados({ matches, category, temporada }) {
+export default function Resultados({ matches, category, temporada, page }) {
   const router = useRouter();
 
   function selectTorneo(id) {
@@ -76,7 +82,7 @@ export default function Resultados({ matches, category, temporada }) {
         <title>Resultados {category} | IOSoccer Sudamérica</title>
       </Head>
       <Selector selectTorneo={selectTorneo} selectTemporada={selectTorneo} temporada={temporada}></Selector>
-      <Results matches={matches} category={category} />
+      <Results matches={matches} category={category} pagina={page} />
     </>
   )
 }

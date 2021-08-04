@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useRouter } from "next/router";
 import { getTeamLogo, fecha, getTeamShortname, getTournamentIcon } from '../utils/Utils';
 
-export default function Results({ matches, category }) {
+export default function Results({ matches, category, pagina }) {
   const router = useRouter();
 
   const columns = useMemo(() => [
@@ -50,7 +50,7 @@ export default function Results({ matches, category }) {
   ], []);
 
   const data = useMemo(() => matches, [matches]);
-  const tableInstance = useTable({ columns, data, initialState: { pageSize: 15 } }, useGlobalFilter, usePagination);
+  const tableInstance = useTable({ columns, data, initialState: { pageSize: 15, pageIndex: pagina } }, useGlobalFilter, usePagination);
 
   const {
     getTableProps,
@@ -125,9 +125,41 @@ export default function Results({ matches, category }) {
         </table>
       </div>
       <div className='pagination'>
-        <button className='boton' disabled={!canPreviousPage} onClick={e => previousPage()} style={{margin: 0, marginRight: '10px'}}>Anterior</button>
+        <button 
+          className='boton' 
+          disabled={!canPreviousPage} 
+          onClick={e => {
+            let id;
+            if (router.query.id) {
+              id = router.query.id[0];
+            } else {
+              id = 't7'
+            }
+            router.push(`/resultados/${id}/${pageIndex}`, undefined, { shallow: true });
+            previousPage();
+          }}
+          style={{margin: 0, marginRight: '10px'}}
+        >
+          Anterior
+        </button>
         <div>Pagina {pageIndex + 1} de {Math.max(pageCount, 1)}</div>
-        <button className='boton' disabled={!canNextPage} onClick={e => nextPage()} style={{margin: 0, marginLeft: '10px'}}>Siguiente</button>
+        <button 
+          className='boton' 
+          disabled={!canNextPage} 
+          onClick={e => {
+            let id;
+            if (router.query.id) {
+              id = router.query.id[0];
+            } else {
+              id = 't7'
+            }
+            router.push(`/resultados/${id}/${pageIndex+2}`, undefined, { shallow: true });
+            nextPage();
+          }} 
+          style={{margin: 0, marginLeft: '10px'}}
+        >
+          Siguiente
+        </button>
       </div>
     </>
   )
