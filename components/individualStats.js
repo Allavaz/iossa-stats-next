@@ -197,7 +197,6 @@ export default function IndividualStats({ players, category }) {
   useEffect(() => {
     let table = document.getElementsByClassName('divDataTable')[0];
     let height = table.getBoundingClientRect().height;
-    console.log(height);
     table.style.height = height + 'px';
     table.style.borderRight = '1px solid var(--table-border-color)';
     table.style.borderLeft = '1px solid var(--table-border-color)';

@@ -1,9 +1,12 @@
 import { useMemo, useEffect } from "react";
 import { useTable, usePagination, useGlobalFilter } from 'react-table';
 import Link from 'next/link';
+import { useRouter } from "next/router";
 import { getTeamLogo, fecha, getTeamShortname, getTournamentIcon } from '../utils/Utils';
 
 export default function Results({ matches, category }) {
+  const router = useRouter();
+
   const columns = useMemo(() => [
     {
       Header: 'Fecha',
@@ -67,7 +70,6 @@ export default function Results({ matches, category }) {
   useEffect(() => {
     let table = document.getElementsByClassName('divDataTable')[0];
     let height = table.getBoundingClientRect().height;
-    console.log(height);
     table.style.height = height + 'px';
     table.style.border = 0;
     table.style.borderRight = '1px solid var(--table-border-color)';
@@ -126,7 +128,7 @@ export default function Results({ matches, category }) {
         </table>
       </div>
       <div className='pagination'>
-        <button className='boton' disabled={!canPreviousPage} onClick={e => previousPage()} style={{margin: 0, marginRight: '10px'}}>Anterior</button>
+        <button className='boton' disabled={!canPreviousPage} onClick={e => {previousPage(); router.push(`/resultados/`)}} style={{margin: 0, marginRight: '10px'}}>Anterior</button>
         <div>Pagina {pageIndex + 1} de {Math.max(pageCount, 1)}</div>
         <button className='boton' disabled={!canNextPage} onClick={e => nextPage()} style={{margin: 0, marginLeft: '10px'}}>Siguiente</button>
       </div>
