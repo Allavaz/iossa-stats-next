@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useMemo, useEffect } from "react";
 import { useTable, usePagination, useGlobalFilter } from 'react-table';
 import Link from 'next/link';
 import { getTeamLogo, fecha, getTeamShortname, getTournamentIcon } from '../utils/Utils';
@@ -60,8 +60,20 @@ export default function Results({ matches, category }) {
     nextPage,
     previousPage,
     setGlobalFilter,
+    rows,
     state: { pageIndex, pageSize },
   } = tableInstance
+
+  useEffect(() => {
+    let table = document.getElementsByClassName('divDataTable')[0];
+    let height = table.getBoundingClientRect().height;
+    console.log(height);
+    table.style.height = height + 'px';
+    table.style.border = 0;
+    table.style.borderRight = '1px solid var(--table-border-color)';
+    table.style.borderLeft = '1px solid var(--table-border-color)';
+    table.style.backgroundColor = 'var(--table-odd-row-color)';
+  }, [])
 
   return (
     <>
@@ -80,9 +92,24 @@ export default function Results({ matches, category }) {
             boxShadow: "var(--shadow)"
           }} />
       </div>
-      <div className='divDataTable' style={{borderLeft: '1px solid var(--table-border-color)', borderRight: '1px solid var(--table-border-color)'}}>
+      <div className='divDataTable'>
         <table className='dataTable' {...getTableProps()}>
           <tbody {...getTableBodyProps()}>
+            {rows.length === 0 ? <div 
+              style={{
+                position: 'absolute', 
+                display: 'flex', 
+                justifyContent: 'center',
+                alignItems: 'center',
+                width: document.getElementsByClassName('divDataTable')[0].getBoundingClientRect().width - 1.7 + 'px',
+                height: document.getElementsByClassName('divDataTable')[0].getBoundingClientRect().height - 1.5 + 'px',
+                color: 'var(--header-color)',
+                backgroundColor: 'var(--table-odd-row-color)',
+                borderTop: '1px solid var(--table-border-color)',
+                borderBottom: '1px solid var(--table-border-color)',
+                borderRight: '1px solid var(--table-border-color)'
+              }}>No hay partidos</div> : 
+            <>
             {page.map((row, index) => {
               prepareRow(row);
               return (
@@ -94,7 +121,7 @@ export default function Results({ matches, category }) {
                   ))}
                 </tr>
               )
-            })}
+            })}</>}
           </tbody>
         </table>
       </div>

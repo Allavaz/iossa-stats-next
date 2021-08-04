@@ -1,5 +1,5 @@
 import { useTable, usePagination, useFilters } from 'react-table';
-import { useMemo } from 'react';
+import { useMemo, useEffect } from 'react';
 import Link from 'next/link';
 import { getTeamLogo } from '../utils/Utils';
 import Image from 'next/image';
@@ -190,17 +190,25 @@ export default function IndividualStats({ players, category }) {
     nextPage,
     previousPage,
     setFilter,
+    rows,
     state: { pageIndex, pageSize },
   } = tableInstance
+
+  useEffect(() => {
+    let table = document.getElementsByClassName('divDataTable')[0];
+    let height = table.getBoundingClientRect().height;
+    console.log(height);
+    table.style.height = height + 'px';
+    table.style.borderRight = '1px solid var(--table-border-color)';
+    table.style.borderLeft = '1px solid var(--table-border-color)';
+    table.style.borderTop = '1px solid var(--table-border-color)';
+    table.style.backgroundColor = 'var(--table-odd-row-color)';
+  }, [])
 
   return (
     <>
       <h3>ESTADÍSTICAS INDIVIDUALES - {category.toUpperCase()}</h3>
-      <div className='divDataTable' style={{
-        borderRight: '1px solid var(--table-border-color)', 
-        borderLeft: '1px solid var(--table-border-color)', 
-        borderTop: '1px solid var(--table-border-color)',
-      }}>
+      <div className='divDataTable'>
         <table {...getTableProps()} style={{borderCollapse: 'initial'}} className="dataTable">
           <thead>
             {headerGroups.map((headerGroup, index) => (
@@ -236,6 +244,17 @@ export default function IndividualStats({ players, category }) {
               </td>
               <td colSpan='23' style={{borderTop: 0, borderRight: 0}}></td>
             </tr>
+            {rows.length === 0 ? <div 
+              style={{
+                position: 'absolute', 
+                display: 'flex', 
+                justifyContent: 'center',
+                alignItems: 'center',
+                width: document.getElementsByClassName('divDataTable')[0].getBoundingClientRect().width + 'px',
+                height: '390px',
+                color: 'var(--header-color)'
+              }}>No hay jugadores</div> : 
+            <>
             {page.map((row, i) => {
               prepareRow(row);
               return (
@@ -261,7 +280,7 @@ export default function IndividualStats({ players, category }) {
                   ))}
                 </tr>
               );
-            })}
+            })}</>}
           </tbody>
         </table>
       </div>
