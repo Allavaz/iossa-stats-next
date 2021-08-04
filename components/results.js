@@ -107,7 +107,7 @@ export default function Results({ matches, category }) {
                 borderTop: '1px solid var(--table-border-color)',
                 borderBottom: '1px solid var(--table-border-color)',
                 borderRight: '1px solid var(--table-border-color)'
-              }}>No hay partidos</div> : 
+              }}><i>No hay partidos</i></div> : 
             <>
             {page.map((row, index) => {
               prepareRow(row);

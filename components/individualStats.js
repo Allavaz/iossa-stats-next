@@ -248,7 +248,7 @@ export default function IndividualStats({ players, category }) {
                 width: document.getElementsByClassName('divDataTable')[0].getBoundingClientRect().width + 'px',
                 height: '390px',
                 color: 'var(--header-color)'
-              }}>No hay jugadores</div> : 
+              }}><i>No hay jugadores</i></div> : 
             <>
             {page.map((row, i) => {
               prepareRow(row);
