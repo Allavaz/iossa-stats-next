@@ -20,7 +20,7 @@ function MyApp({ Component, pageProps }) {
 
   return (
 		<>
-			<NextNProgress color={'#ff9800'} height={2} />
+			<NextNProgress color={'#ff9800'} height={2} showOnShallow={false} />
 			<Layout>
 				<Component {...pageProps} />
 			</Layout>
