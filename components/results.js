@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useMemo, useEffect } from "react";
 import { useTable, usePagination, useGlobalFilter } from 'react-table';
 import Link from 'next/link';
 import { useRouter } from "next/router";
@@ -50,7 +50,7 @@ export default function Results({ matches, category, pagina }) {
   ], []);
 
   const data = useMemo(() => matches, [matches]);
-  const tableInstance = useTable({ columns, data, initialState: { pageSize: 15, pageIndex: pagina } }, useGlobalFilter, usePagination);
+  const tableInstance = useTable({ columns, data, initialState: { pageSize: 15 } }, useGlobalFilter, usePagination);
 
   const {
     getTableProps,
@@ -63,9 +63,14 @@ export default function Results({ matches, category, pagina }) {
     nextPage,
     previousPage,
     setGlobalFilter,
+    gotoPage,
     rows,
     state: { pageIndex, pageSize },
   } = tableInstance
+
+  useEffect(() => {
+    gotoPage(pagina);
+  }, []);
 
   return (
     <>
@@ -73,7 +78,16 @@ export default function Results({ matches, category, pagina }) {
         <h3 style={{display: 'inline', marginRight: '10px'}}>RESULTADOS - {category.toUpperCase()}</h3>
         <input type='text' 
           placeholder='Buscar equipo/torneo…' 
-          onChange={e => setGlobalFilter(e.target.value)}
+          onChange={e => {
+            setGlobalFilter(e.target.value); 
+            let id;
+            if (router.query.id) {
+              id = router.query.id[0];
+            } else {
+              id = 't7'
+            }
+            router.push(`/resultados/${id}/1`, undefined, { shallow: true });
+          }}
           style={{
             border: "1px solid var(--button-border)",
             fontSize: "11pt",

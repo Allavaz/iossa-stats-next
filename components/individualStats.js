@@ -1,5 +1,5 @@
 import { useTable, usePagination, useFilters } from 'react-table';
-import { useMemo } from 'react';
+import { useMemo, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { getTeamLogo } from '../utils/Utils';
@@ -179,8 +179,8 @@ export default function IndividualStats({ players, category, pagina }) {
   ], []);
 
   const data = useMemo(() => players, [players]);
-  const tableInstance = useTable({ columns, data, initialState: { pageSize: 15, pageIndex: pagina } }, useFilters, usePagination);
-
+  const tableInstance = useTable({ columns, data, initialState: { pageSize: 15 } }, useFilters, usePagination);
+  
   const {
     getTableProps,
     getTableBodyProps,
@@ -192,11 +192,16 @@ export default function IndividualStats({ players, category, pagina }) {
     pageCount,
     nextPage,
     previousPage,
+    gotoPage,
     setFilter,
     rows,
     state: { pageIndex, pageSize },
   } = tableInstance
 
+  useEffect(() => {
+    gotoPage(pagina);
+  }, []);
+  
   return (
     <>
       <h3>ESTADÍSTICAS INDIVIDUALES - {category.toUpperCase()}</h3>
@@ -235,10 +240,36 @@ export default function IndividualStats({ players, category, pagina }) {
           <tbody {...getTableBodyProps()}>
             <tr>
               <td style={{borderTop: 0, borderLeft: 0, position: 'sticky', left: 0, zIndex: 2}}>
-                <input type='text' style={{textAlign: 'center', width: '21ch'}} onChange={e => setFilter('name', e.target.value)}></input>
+                <input 
+                  type='text' 
+                  style={{textAlign: 'center', width: '21ch'}} 
+                  onChange={e => {
+                    setFilter('name', e.target.value);
+                    let id;
+                    if (router.query.id) {
+                      id = router.query.id[0];
+                    } else {
+                      id = 't7'
+                    }
+                    router.push(`/individuales/${id}/1`, undefined, { shallow: true });
+                  }}
+                />
               </td>
               <td style={{borderTop: 0, borderLeft: 0, borderRight: 0}}>
-                <input type='text' style={{textAlign: 'center', width: '23ch'}} onChange={e => setFilter('team', e.target.value)}></input>
+                <input 
+                  type='text' 
+                  style={{textAlign: 'center', width: '23ch'}} 
+                  onChange={e => {
+                    setFilter('team', e.target.value);
+                    let id;
+                    if (router.query.id) {
+                      id = router.query.id[0];
+                    } else {
+                      id = 't7'
+                    }
+                    router.push(`/individuales/${id}/1`, undefined, { shallow: true });
+                  }}
+                 />
               </td>
               <td colSpan='23' style={{borderTop: 0, borderRight: 0}}></td>
             </tr>
