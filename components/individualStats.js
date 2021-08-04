@@ -2,7 +2,7 @@ import { useTable, usePagination, useFilters } from 'react-table';
 import { useMemo, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
-import { getTeamLogo } from '../utils/Utils';
+import { getTeamLogo, temporadaActual } from '../utils/Utils';
 import Image from 'next/image';
 
 export default function IndividualStats({ players, category, pagina }) {
@@ -249,7 +249,7 @@ export default function IndividualStats({ players, category, pagina }) {
                     if (router.query.id) {
                       id = router.query.id[0];
                     } else {
-                      id = 't7'
+                      id = temporadaActual;
                     }
                     router.push(`/individuales/${id}/1`, undefined, { shallow: true });
                   }}
@@ -265,7 +265,7 @@ export default function IndividualStats({ players, category, pagina }) {
                     if (router.query.id) {
                       id = router.query.id[0];
                     } else {
-                      id = 't7'
+                      id = temporadaActual;
                     }
                     router.push(`/individuales/${id}/1`, undefined, { shallow: true });
                   }}
@@ -322,7 +322,7 @@ export default function IndividualStats({ players, category, pagina }) {
             if (router.query.id) {
               id = router.query.id[0];
             } else {
-              id = 't7'
+              id = temporadaActual
             }
             router.push(`/individuales/${id}/${pageIndex}`, undefined, { shallow: true });
             previousPage();
@@ -340,7 +340,7 @@ export default function IndividualStats({ players, category, pagina }) {
             if (router.query.id) {
               id = router.query.id[0];
             } else {
-              id = 't7'
+              id = temporadaActual
             }
             router.push(`/individuales/${id}/${pageIndex+2}`, undefined, { shallow: true });
             nextPage();

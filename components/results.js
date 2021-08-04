@@ -2,7 +2,7 @@ import { useMemo, useEffect } from "react";
 import { useTable, usePagination, useGlobalFilter } from 'react-table';
 import Link from 'next/link';
 import { useRouter } from "next/router";
-import { getTeamLogo, fecha, getTeamShortname, getTournamentIcon } from '../utils/Utils';
+import { getTeamLogo, fecha, getTeamShortname, getTournamentIcon, temporadaActual } from '../utils/Utils';
 
 export default function Results({ matches, category, pagina }) {
   const router = useRouter();
@@ -84,7 +84,7 @@ export default function Results({ matches, category, pagina }) {
             if (router.query.id) {
               id = router.query.id[0];
             } else {
-              id = 't7'
+              id = temporadaActual;
             }
             router.push(`/resultados/${id}/1`, undefined, { shallow: true });
           }}
@@ -147,7 +147,7 @@ export default function Results({ matches, category, pagina }) {
             if (router.query.id) {
               id = router.query.id[0];
             } else {
-              id = 't7'
+              id = temporadaActual;
             }
             router.push(`/resultados/${id}/${pageIndex}`, undefined, { shallow: true });
             previousPage();
@@ -165,7 +165,7 @@ export default function Results({ matches, category, pagina }) {
             if (router.query.id) {
               id = router.query.id[0];
             } else {
-              id = 't7'
+              id = temporadaActual;
             }
             router.push(`/resultados/${id}/${pageIndex+2}`, undefined, { shallow: true });
             nextPage();

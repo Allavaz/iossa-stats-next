@@ -4,7 +4,7 @@ import Head from 'next/head';
 import Torneos from '../../utils/Torneos.json';
 import Selector from '../../components/selector';
 import { useRouter } from 'next/router';
-import { getAllQueries } from '../../utils/Utils';
+import { getAllQueries, temporadaActual } from '../../utils/Utils';
 
 function getCategory(arg) {
   if (arg === 'all') {
@@ -54,7 +54,7 @@ export async function getServerSideProps(context) {
     if (context.params.id.length === 2) {
       page = context.params.id[1] - 1;
     }
-  } else id = 't7';
+  } else id = temporadaActual;
   if (getAllQueries().includes(id)) {
     let players = await getPlayers(id);
     let category = getCategory(id);

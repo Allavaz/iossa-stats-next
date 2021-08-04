@@ -1,4 +1,4 @@
-import { getAllQueries } from "../../utils/Utils";
+import { getAllQueries, temporadaActual } from "../../utils/Utils";
 import Head from 'next/head';
 import { getTop10Assists, getTop10Goals, getTop10Rusticos } from "../../lib/getFromDB";
 import Selector from "../../components/selector";
@@ -51,7 +51,7 @@ function getTemporada(arg) {
 export async function getServerSideProps(context) {
   let id;
   if (context.params.id) id = context.params.id[0];
-  else id = 't7';
+  else id = temporadaActual;
   if (getAllQueries().includes(id)) {
     let goleadores = await getTop10Goals(id);
     let asistidores = await getTop10Assists(id);

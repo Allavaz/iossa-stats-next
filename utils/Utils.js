@@ -1,6 +1,8 @@
 var Teams = require('./Teams.json')
 var Torneos = require('./Torneos.json');
 
+exports.temporadaActual = 't7';
+
 exports.getAllQueries = function() {
   let queries = []
   for (let i in Torneos) {
