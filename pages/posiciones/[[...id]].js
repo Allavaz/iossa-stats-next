@@ -113,9 +113,9 @@ export default function Posiciones({ tablas, category, temporada }) {
         <meta property="og:site_name" content='IOSoccer Sudamérica' />
       </Head>
       <select id='selector' defaultValue={temporada} onChange={e => selectTemporada(e.target.value)}>
-        {Torneos.map((item) => (
+        {Torneos.map((item, index) => (
           item.temporada === 'all' ? null :
-          <option value={item.temporada}>{item.titulo}</option>  
+          <option key={index} value={item.temporada}>{item.titulo}</option>  
         ))}
       </select>
       <div className='colCon' style={{margin: 0}}>
