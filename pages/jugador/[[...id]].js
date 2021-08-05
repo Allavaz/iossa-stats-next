@@ -48,6 +48,13 @@ export default function Player({playerMatches, statsAll, statsLast15, statsLast1
     <>
       <Head>
         <title>{statsAll.name} | IOSoccer Sudamérica</title>
+        <meta name="title" content={`${statsAll.name} | IOSoccer Sudamérica`} />
+        <meta name="description" content={statsAll.team} />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content='IOSoccer Sudamérica' />
+        <meta property="og:title" content={`${statsAll.name} | IOSoccer Sudamérica`} />
+        <meta property="og:description" content={statsAll.team} />
+        <meta property="og:image" content={steamInfo.avatarfull} />
       </Head>
       <div style={{display: 'flex', flexWrap: 'wrap', justifyContent: 'center'}}>
         <PlayerCard statsAll={statsAll} statsLast15={statsLast15} steamInfo={steamInfo} />

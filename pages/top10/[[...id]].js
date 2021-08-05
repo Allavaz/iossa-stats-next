@@ -80,6 +80,13 @@ export default function Top10({ goleadores, asistidores, rusticos, category, tem
     <>
       <Head>
         <title>Top 10 {category} | IOSoccer Sudamérica</title>
+        <meta name="title" content={`Top 10 ${category} | IOSoccer Sudamérica`} />
+        <meta name="description" content={`Top 10 ${category} de goleadores, asistidores y rústicos`} />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content={`Top 10 ${category} | IOSoccer Sudamérica`} />
+        <meta property="og:description" content={`Top 10 ${category} de goleadores, asistidores y rústicos`} />
+        <meta property="og:image" content="/logo-solo.png" />
+        <meta property="og:site_name" content='IOSoccer Sudamérica' />
       </Head>
       <Selector selectTorneo={selectTorneo} selectTemporada={selectTorneo} temporada={temporada} />
       <div style={{display: 'flex', flexWrap: 'wrap', justifyContent: 'space-evenly'}}>

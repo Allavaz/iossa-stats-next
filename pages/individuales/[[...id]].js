@@ -79,7 +79,14 @@ export default function Individuales({ players, category, temporada, page }) {
   return (
     <>
       <Head>
-        <title>Estadísticas Individuales {category} | IOSoccer Sudamérica</title>
+        <title>Estadísticas {category} | IOSoccer Sudamérica</title>
+        <meta name="title" content={`Estadísticas ${category} | IOSoccer Sudamérica`} />
+        <meta name="description" content={`Estadísticas ${category}`} />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content={`Estadísticas ${category} | IOSoccer Sudamérica`} />
+        <meta property="og:description" content={`Estadísticas ${category}`} />
+        <meta property="og:image" content="/logo-solo.png" />
+        <meta property="og:site_name" content='IOSoccer Sudamérica' />
       </Head>
       <Selector selectTorneo={selectTorneo} selectTemporada={selectTorneo} temporada={temporada}></Selector>
       <IndividualStats players={players} category={category} pagina={page} />

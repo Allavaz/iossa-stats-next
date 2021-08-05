@@ -80,6 +80,13 @@ export default function Resultados({ matches, category, temporada, page }) {
     <>
       <Head>
         <title>Resultados {category} | IOSoccer Sudamérica</title>
+        <meta name="title" content={`Resultados ${category} | IOSoccer Sudamérica`} />
+        <meta name="description" content={`Resultados ${category}`} />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content={`Resultados ${category} | IOSoccer Sudamérica`} />
+        <meta property="og:description" content={`Resultados ${category}`} />
+        <meta property="og:image" content="/logo-solo.png" />
+        <meta property="og:site_name" content='IOSoccer Sudamérica' />
       </Head>
       <Selector selectTorneo={selectTorneo} selectTemporada={selectTorneo} temporada={temporada}></Selector>
       <Results matches={matches} category={category} pagina={page} />

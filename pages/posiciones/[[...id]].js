@@ -104,6 +104,13 @@ export default function Posiciones({ tablas, category, temporada }) {
     <>
       <Head>
         <title>Posiciones {category} | IOSoccer Sudamérica</title>
+        <meta name="title" content={`Posiciones ${category} | IOSoccer Sudamérica`} />
+        <meta name="description" content={`Posiciones ${category}`} />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content={`Posiciones ${category} | IOSoccer Sudamérica`} />
+        <meta property="og:description" content={`Posiciones ${category}`} />
+        <meta property="og:image" content="/logo-solo.png" />
+        <meta property="og:site_name" content='IOSoccer Sudamérica' />
       </Head>
       <select id='selector' defaultValue={temporada} onChange={e => selectTemporada(e.target.value)}>
         {Torneos.map((item) => (
