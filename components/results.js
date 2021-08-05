@@ -129,7 +129,7 @@ export default function Results({ matches, category, pagina }) {
               )
             })}
             {[...Array(pageSize - page.length)].map((e, i) => (
-              <tr>
+              <tr key={i}>
                 <td colSpan='5' style={{borderLeft: 0, borderRight: 0, padding: '9px'}}>&nbsp;</td>
               </tr>
             ))}

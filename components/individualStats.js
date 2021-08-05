@@ -301,7 +301,7 @@ export default function IndividualStats({ players, category, pagina }) {
               );
             })}
             {[...Array(pageSize - page.length)].map((e, i) => (
-              <tr>
+              <tr key={i}>
                 <td style={{
                   position: 'sticky',
                   left: 0,
@@ -317,8 +317,8 @@ export default function IndividualStats({ players, category, pagina }) {
                 }}>
                   &nbsp;
                 </td>
-                {[...Array(23)].map(() => (
-                  <td style={{
+                {[...Array(23)].map((e, i) => (
+                  <td key={i} style={{
                     border: 0, 
                     borderBottom: '1px solid var(--table-border-color)', 
                     borderLeft: '1px solid var(--table-border-color)',
