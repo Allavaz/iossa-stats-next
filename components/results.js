@@ -102,19 +102,18 @@ export default function Results({ matches, category, pagina }) {
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'flex-start',
-        height: '511px',
         border: 0,
         borderRight: '1px solid var(--table-border-color)',
         borderLeft: '1px solid var(--table-border-color)',
-        backgroundColor: 'var(--table-odd-row-color)',
-        borderBottom: page.length === 0 || page.length < pageSize ? '1px solid var(--table-border-color)' : 0,
-        borderTop: page.length === 0 ? '1px solid var(--table-border-color)' : 0
+        backgroundColor: 'var(--table-odd-row-color)'
       }}>
         {rows.length === 0 ? <div 
           style={{
+            position: 'absolute',
             color: 'var(--header-color)',
-            alignSelf: 'center'
-          }}><i>No hay partidos</i></div> : 
+            alignSelf: 'center',
+            border: 0
+          }}><i>No hay partidos</i></div> : null}
         <table className='dataTable' {...getTableProps()}>
           <tbody {...getTableBodyProps()}>
             {page.map((row, index) => {
@@ -129,8 +128,13 @@ export default function Results({ matches, category, pagina }) {
                 </tr>
               )
             })}
+            {[...Array(pageSize - page.length)].map((e, i) => (
+              <tr>
+                <td colSpan='5' style={{borderLeft: 0, borderRight: 0, padding: '9px'}}>&nbsp;</td>
+              </tr>
+            ))}
           </tbody>
-        </table>}
+        </table>
       </div>
       <div className='pagination'>
         <button 

@@ -206,7 +206,6 @@ export default function IndividualStats({ players, category, pagina }) {
     <>
       <h3>ESTADÍSTICAS INDIVIDUALES - {category.toUpperCase()}</h3>
       <div className='divDataTable' style={{
-        height: '481px',
         borderRight: '1px solid var(--table-border-color)',
         borderLeft: '1px solid var(--table-border-color)',
         borderTop: '1px solid var(--table-border-color)',
@@ -271,19 +270,10 @@ export default function IndividualStats({ players, category, pagina }) {
                   }}
                  />
               </td>
-              <td colSpan='23' style={{borderTop: 0, borderRight: 0}}></td>
+              <td colSpan='23' style={{borderTop: 0, borderRight: 0}}>
+                {rows.length === 0 ? <div style={{display: 'flex', color: 'var(--header-color)'}}><i>No hay jugadores</i></div> : null}
+              </td>
             </tr>
-            {rows.length === 0 ? <div 
-              style={{
-                position: 'absolute', 
-                display: 'flex', 
-                justifyContent: 'center',
-                alignItems: 'center',
-                width: document.getElementsByClassName('divDataTable')[0].getBoundingClientRect().width + 'px',
-                height: '390px',
-                color: 'var(--header-color)'
-              }}><i>No hay jugadores</i></div> : 
-            <>
             {page.map((row, i) => {
               prepareRow(row);
               return (
@@ -309,7 +299,34 @@ export default function IndividualStats({ players, category, pagina }) {
                   ))}
                 </tr>
               );
-            })}</>}
+            })}
+            {[...Array(pageSize - page.length)].map((e, i) => (
+              <tr>
+                <td style={{
+                  position: 'sticky',
+                  left: 0,
+                  border: 0, 
+                  borderBottom: '1px solid var(--table-border-color)',
+                  borderRight: '1px solid var(--table-border-color)',
+                  borderBottom: '1px solid var(--table-border-color)', 
+                  zIndex: 2
+                }}>&nbsp;</td>
+                <td style={{
+                  border: 0,
+                  borderBottom: '1px solid var(--table-border-color)'
+                }}>
+                  &nbsp;
+                </td>
+                {[...Array(23)].map(() => (
+                  <td style={{
+                    border: 0, 
+                    borderBottom: '1px solid var(--table-border-color)', 
+                    borderLeft: '1px solid var(--table-border-color)',
+                    padding: '5.54px'
+                  }}>&nbsp;</td>
+                ))}
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>
