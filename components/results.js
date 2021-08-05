@@ -99,30 +99,24 @@ export default function Results({ matches, category, pagina }) {
           }} />
       </div>
       <div className='divDataTable' style={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'flex-start',
         height: '511px',
         border: 0,
         borderRight: '1px solid var(--table-border-color)',
         borderLeft: '1px solid var(--table-border-color)',
         backgroundColor: 'var(--table-odd-row-color)',
-        borderBottom: (page.length < pageSize && page.length > 0) ? '1px solid var(--table-border-color)' : 0
+        borderBottom: page.length === 0 || page.length < pageSize ? '1px solid var(--table-border-color)' : 0,
+        borderTop: page.length === 0 ? '1px solid var(--table-border-color)' : 0
       }}>
+        {rows.length === 0 ? <div 
+          style={{
+            color: 'var(--header-color)',
+            alignSelf: 'center'
+          }}><i>No hay partidos</i></div> : 
         <table className='dataTable' {...getTableProps()}>
           <tbody {...getTableBodyProps()}>
-            {rows.length === 0 ? <div 
-              style={{
-                position: 'absolute', 
-                display: 'flex', 
-                justifyContent: 'center',
-                alignItems: 'center',
-                width: document.getElementsByClassName('divDataTable')[0].getBoundingClientRect().width - 1.7 + 'px',
-                height: document.getElementsByClassName('divDataTable')[0].getBoundingClientRect().height - 1.5 + 'px',
-                color: 'var(--header-color)',
-                backgroundColor: 'var(--table-odd-row-color)',
-                borderTop: '1px solid var(--table-border-color)',
-                borderBottom: '1px solid var(--table-border-color)',
-                borderRight: '1px solid var(--table-border-color)'
-              }}><i>No hay partidos</i></div> : 
-            <>
             {page.map((row, index) => {
               prepareRow(row);
               return (
@@ -134,9 +128,9 @@ export default function Results({ matches, category, pagina }) {
                   ))}
                 </tr>
               )
-            })}</>}
+            })}
           </tbody>
-        </table>
+        </table>}
       </div>
       <div className='pagination'>
         <button 
