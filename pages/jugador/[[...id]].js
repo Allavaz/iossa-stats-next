@@ -56,14 +56,12 @@ export default function Player({playerMatches, statsAll, statsLast15, statsLast1
         <meta property="og:description" content={statsAll.team} />
         <meta property="og:image" content={steamInfo.avatarfull} />
       </Head>
-      <div style={{display: 'flex', flexWrap: 'wrap', justifyContent: 'center'}}>
-        <PlayerCard statsAll={statsAll} statsLast15={statsLast15} steamInfo={steamInfo} />
-        <div style={{display: 'flex', flexWrap: 'wrap', flexGrow: 1, alignContent: 'stretch', justifyContent: 'space-between'}} suppressHydrationWarning={true}>
-          {process.browser && <Playstyle statsAll={statsAll} />}
-          {statsLast10.saves > statsLast10.shotsontarget ?
-          process.browser && <SavesConceded playerMatches={playerMatches.slice(0, 10)} id={statsAll.steamid} /> :
-          process.browser && <GoalsShots playerMatches={playerMatches.slice(0, 10)} id={statsAll.steamid} />}
-        </div>
+      <PlayerCard statsAll={statsAll} statsLast15={statsLast15} steamInfo={steamInfo} />
+      <div style={{display: 'flex', flexWrap: 'wrap', flexGrow: 1, alignContent: 'stretch', justifyContent: 'space-between'}} suppressHydrationWarning={true}>
+        {process.browser && <Playstyle statsAll={statsAll} />}
+        {statsLast10.saves > statsLast10.shotsontarget ?
+        process.browser && <SavesConceded playerMatches={playerMatches.slice(0, 10)} id={statsAll.steamid} /> :
+        process.browser && <GoalsShots playerMatches={playerMatches.slice(0, 10)} id={statsAll.steamid} />}
       </div>
       <PlayerMatches matches={playerMatches.slice(0,5)} id={statsAll.steamid} />
     </>
